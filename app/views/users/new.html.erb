@@ -1,0 +1,27 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <b><%= error %></b>
+  <% end %>
+<% end %>
+
+
+<div class="login_container">
+  <form action="/sessions" method="post">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <fieldset>
+      <legend>Login</legend>
+      <p>
+        <label>Email:</label>
+        <input type="text" name="email">
+      </p>
+      <p>
+        <label>Password:</label>
+        <input type="password" name="password">
+      </p>
+      <p>
+        <input type="submit" value="Login">
+      </p>
+      <a href='/'>Click here to register</a>
+    </fieldset>
+  </form>
+</div>

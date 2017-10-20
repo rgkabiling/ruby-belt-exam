@@ -1,0 +1,59 @@
+<a href="/sessions" data-method="delete">Log Out</a>
+
+<h3>Name:  <%= @lender.first_name %><%= @lender.last_name %></h3>
+<h3>Account Balance: <%= @lender.money %></h3>
+
+
+<p>List of people who are in need of help:</p>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Money Needed For</th>
+    <th>Description</th>
+    <th>Amount Needed</th>
+    <th>Amount Raised</th>
+    <th>Action</th>
+  </tr>
+  <% @borrowers.each do |borrower| %>
+    <tr>
+      <td><%= borrower.first_name %> <%= borrower.last_name %></td>
+      <td><%= borrower.purpose %></td>
+      <td><%= borrower.description %></td>
+      <td><%= borrower.money %></td>
+      <td><%= borrower.histories%></td>
+      <td>
+        <form action="/histories/<%= borrower.id %>" method="post">
+          <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+          <select name="amount">
+            <% @monies.each do |money| %>
+              <option value="<%= money %>"><%= money %></option>
+            <% end %>
+          </select>
+          <input type="submit" value="Lend">
+        </form>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+</p>List of people you lent money to:</p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Money Needed For</th>
+    <th>Description</th>
+    <th>Amount Needed</th>
+    <th>Amount Raised</th>
+    <th>Amount Lent</th>
+  </tr>
+  <% @lender.histories.each do |lender| %>
+    <tr>
+      <td><%= lender.borrower.first_name %> <%= lender.borrower.last_name %></td>
+      <td><%= lender.borrower.purpose %></td>
+      <td><%= lender.borrower.description%></td>
+      <td><%= lender.borrower.money %></td>
+      <td><%= lender.borrower.raised %></td>
+      <td><%= lender.amount %></td>
+    </tr>
+  <% end %>

@@ -1,0 +1,91 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |error| %>
+    <b><%= error %></b>
+  <% end %>
+<% end %>
+
+  <form action="/lenders" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+    <h2>Lender</h2>
+        <p>
+          <label>First Name:</label>
+          <input type="text" name="lender[first_name]">
+        </p>
+        <p>
+          <label>Last Name:</label>
+          <input type="text" name="lender[last_name]">
+        </p>
+        <p>
+          <label>Email:</label>
+          <input type="text" name="lender[email]">
+        </p>
+        <p>
+          <label>Password:</label>
+          <input type="password" name="lender[password]">
+        </p>
+        <p>
+          <label>Confirm PW:</label>
+          <input type="password" name="lender[password_confirmation]">
+        </p>
+        <p>
+          <label>Money:</label>
+          <select name="lender[money]">
+            <% @monies.each do |money| %>
+              <option value="<%= money %>"><%= money %></option>
+            <% end %>
+          </select>
+        </p>
+        <p>
+          <input type="submit" value="Register">
+        </p>
+        <a href='/login'>Already a member?</a>
+
+  </form>
+
+
+  <form action="/borrowers" method="post">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+      <h2>Borrower</h2>
+        <p>
+          <label>First Name:</label>
+          <input type="text" name="borrower[first_name]">
+        </p>
+        <p>
+          <label>Last Name:</label>
+          <input type="text" name="borrower[last_name]">
+        </p>
+        <p>
+          <label>Email:</label>
+          <input type="text" name="borrower[email]">
+        </p>
+        <p>
+          <label>Password:</label>
+          <input type="password" name="borrower[password]">
+        </p>
+        <p>
+          <label>Confirm PW:</label>
+          <input type="password" name="borrower[password_confirmation]">
+        </p>
+        <p>
+          <label>Need Money for::</label>
+          <input type="text" name="borrower[purpose]">
+        </p>
+        <p>
+          <label>Description:</label>
+          <textarea cols='55' rows='4' name="borrower[description]"></textarea>
+        <p>
+          <label>Amount Needed:</label>
+          <select name="borrower[money]">
+            <% @monies.each do |money| %>
+              <option value="<%= money %>"><%= money %></option>
+            <% end %>
+          </select>
+        </p>
+        <p>
+          <input type="submit" value="Register">
+        </p>
+        <a href='/login'>Already a member?</a>
+
+  </form>
